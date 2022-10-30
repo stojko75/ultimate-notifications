@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Stojko/ultimate-notifications.iml" filepath="$PROJECT_DIR$/.idea/Stojko/ultimate-notifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ultimate-notifications.iml" filepath="$PROJECT_DIR$/.idea/ultimate-notifications.iml" />
     </modules>
   </component>
 </project>
