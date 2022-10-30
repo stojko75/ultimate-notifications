@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+namespace Stojko\UltimateNotifications\bin;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Exception;
+use Illuminate\Database\Schema\Blueprint;
+use Stojko\UltimateNotifications\ServiceContainer\ServiceContainer;
+
+class UltimateNotificationsInstall
+{
+    private ServiceContainer $sc;
+
+    public function __construct()
+	{
+        $this->sc = new ServiceContainer();
+    }
+
+	/**
+	 * @throws Exception
+	 */
+	public function run(): void
+	{
+		$this->installTables();
+    }
+
+	/**
+	 * @throws Exception
+	 */
+	private function installTables(): void
+	{
+		$db = $this->sc->get('db');
+
+		$db::schema()->create('notifications', function (Blueprint $table) {
+			$table->increments('id');
+			$table->unsignedInteger('receiver_id')->nullable(false)->comment("Foreign key of user's who receive notification.");
+			$table->unsignedInteger('sender_id')->nullable(true)->comment("Foreign key of user's who receive notification. Can be null if message is created by system.");
+			$table->string('subject')->comment('The message subject.');
+			$table->text('content')->comment('The content (message) of the notification.');
+            $table->tinyInteger('seen')->nullable(false)->default(0)->comment('shows if the message has been seen.');
+			$table->timestamp('created_at')->useCurrent();
+			$table->timestamp('updated_at')->useCurrent();
+		});
+    }
+}
+
+$install = new UltimateNotificationsInstall();
+$install->run();
+
