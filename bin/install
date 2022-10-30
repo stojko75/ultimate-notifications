@@ -23,13 +23,13 @@ class UltimateNotificationsInstall
 	 */
 	public function run(): void
 	{
-		$this->installTables();
+		$this->createTables();
     }
 
 	/**
 	 * @throws Exception
 	 */
-	private function installTables(): void
+	private function createTables(): void
 	{
 		$db = $this->sc->get('db');
 

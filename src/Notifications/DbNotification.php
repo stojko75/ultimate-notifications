@@ -4,6 +4,7 @@ namespace Stojko\UltimateNotifications\Notifications;
 
 use Exception;
 use Stojko\UltimateNotifications\Interfaces\NotificationInterface;
+use Stojko\UltimateNotifications\Dao\NotificationDao;
 
 class DbNotification implements NotificationInterface
 {
@@ -25,7 +26,6 @@ class DbNotification implements NotificationInterface
 
 	public function send()
 	{
-		$notification = NotificatioDao::create();
-		echo "Sending db notification";
+		$notification = (new NotificationDao)->create($this->options);
 	}
 }
